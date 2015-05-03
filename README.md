@@ -20,9 +20,10 @@ import java.util.List;
 public class TestingAPI {
 
   public static void main(String[] args) throws ApiException {
-        ApiClient client = ApiClient.getInstance();
-        client.setKey("your-api-key-here");
+  	ApiClient client = ApiClient.getInstance();
+    client.setKey("your-api-key-here");
 
+	// Get mailboxes
   	List<String> fields = new ArrayList<String>();
   	fields.add("name");
 	fields.add("email");
@@ -39,6 +40,7 @@ public class TestingAPI {
 		}
 	}
 
+	// Get folders
 	Mailbox mailbox = client.getMailbox(85);
 	if (mailbox != null) {
 		String mailboxName = mailbox.getName();
@@ -54,6 +56,7 @@ public class TestingAPI {
 		}
 	}
 
+	// Get customers
 	Page allCustomers = client.getCustomers(0);
 	Collection customers = allCustomers.getItems();
 
