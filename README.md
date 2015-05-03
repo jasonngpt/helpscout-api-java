@@ -26,21 +26,45 @@ public class TestingAPI {
   	List<String> fields = new ArrayList<String>();
   	fields.add("name");
 	fields.add("email");
+	fields.add("id");
 	Page mailboxes = client.getMailboxes(fields);
 	if (mailboxes != null) {
-	      // do something
+		// do something
+		Collection allMailboxes = mailboxes.getItems();
+
+		for (Object mailboxObj : allMailboxes) {
+			Mailbox mailbox = (Mailbox) mailboxObj;
+			System.out.println("Name: " + mailbox.getName());
+			System.out.println("ID: " + mailbox.getId());
+		}
 	}
 
 	Mailbox mailbox = client.getMailbox(85);
 	if (mailbox != null) {
 		String mailboxName = mailbox.getName();
-		Page folders = client.getFolders();
+		Page folders = client.getFolders(37803);
+
+		if (folders != null) {
+			Collection allFolders = folders.getItems();
+
+			for (Object foldersObj : allFolders) {
+				Folder folder = (Folder) foldersObj;
+				System.out.println("Name: " + folder.getName());
+			}
+		}
 	}
 
-	Customer c = client.getCustomer(customer-id-here);
-	if (c.hasSocialProfiles()) {
-		List<SocialProfileEntry> profiles = c.getSocialProfiles();
-		// do something
+	Page allCustomers = client.getCustomers(0);
+	Collection customers = allCustomers.getItems();
+
+	for (Object customersObj : customers) {
+		Customer customer = (Customer) customersObj;
+
+		System.out.println("Customer Name: " + customer.getFirstName() + " " + customer.getLastName());
+		if (customer.hasSocialProfiles()) {
+			List profiles = customer.getSocialProfiles();
+			// Do something
+		}
 	}
   }
 }
