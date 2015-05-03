@@ -1,21 +1,20 @@
 Help Scout Java Wrapper
 =======================
-Java Wrapper for the Help Scout API. More information on our developer site: [http://developer.helpscout.net](http://developer.helpscout.net).
+Forked Java Wrapper for the Help Scout API. More information on our developer site: [http://developer.helpscout.net](http://developer.helpscout.net).
 
-Version 1.3.13 Released
----------------------
-Please see the [Changelog](https://github.com/helpscout/helpscout-api-java/blob/master/CHANGELOG.md) for details.
+See the [Changelog](https://github.com/jasonngpt/helpscout-api-java/blob/master/CHANGELOG.md) for details.
 
 Requirements
 ---------------------
-* JDE 1.6
-* [google-gson](http://code.google.com/p/google-gson/)
+* JRE 1.6
 
 Example Usage: API
 ---------------------
-<pre><code>
-import net.helpscout.api;
+```java
+import net.helpscout.api.*;
+
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class TestingAPI {
@@ -28,14 +27,14 @@ public class TestingAPI {
   	fields.add("name");
 	fields.add("email");
 	Page mailboxes = client.getMailboxes(fields);
-	if (mailboxes) {
+	if (mailboxes != null) {
 	      // do something
 	}
 
 	Mailbox mailbox = client.getMailbox(85);
-	if (mailbox) {
+	if (mailbox != null) {
 		String mailboxName = mailbox.getName();
-		List<Folder> folders = mailbox.getFolders();
+		Page folders = client.getFolders();
 	}
 
 	Customer c = client.getCustomer(customer-id-here);
@@ -45,7 +44,7 @@ public class TestingAPI {
 	}
   }
 }
-</code></pre>
+```
 
 Field Selectors
 ---------------------
